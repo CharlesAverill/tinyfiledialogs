@@ -4,7 +4,7 @@
  (name tinyfiledialogs)
  (public_name tinyfiledialogs)
  (modules tinyfiledialogs)
- (libraries ctypes ctypes.foreign)
+ (libraries ctypes ctypes-foreign)
  (foreign_stubs
   (language c)
   (flags

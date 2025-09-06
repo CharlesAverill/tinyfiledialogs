@@ -10,6 +10,7 @@
 (authors "Charles Averill <charlesaverill20@gmail.com>")
 
 (maintainers "Charles Averill <charlesaverill20@gmail.com>")
+(maintenance_intent "(latest)")
 
 (license MIT)
 
@@ -19,7 +20,7 @@
  (name tinyfiledialogs)
  (synopsis "OCaml bindings to tinyfiledialogs")
  (description "Simple, cross-platform file dialogs")
- (depends ocaml dune ctypes)
+ (depends ocaml dune ctypes ctypes-foreign)
  (tags
  ("GUI" "Dialogs" "File Dialog" "Color Picker" "Cross-Platform"
   "TinyFileDialogs" "Open File Dialog" "Save File Dialog"
