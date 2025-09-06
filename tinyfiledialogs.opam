@@ -19,7 +19,7 @@ tags: [
   "Input Box"
 ]
 homepage: "https://github.com/CharlesAverill/tinyfiledialogs"
-doc: "https://charlesaverill.github.io/tinyfiledialogs"
+doc: "https://charlesaverill.github.io/tinyfiledialogs/tinyfiledialogs/"
 bug-reports: "https://github.com/CharlesAverill/tinyfiledialogs/issues"
 depends: [
   "ocaml"

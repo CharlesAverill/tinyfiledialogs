@@ -10,6 +10,7 @@
 (authors "Charles Averill <charlesaverill20@gmail.com>")
 
 (maintainers "Charles Averill <charlesaverill20@gmail.com>")
+(maintenance_intent "(latest)")
 
 (license MIT)
 
