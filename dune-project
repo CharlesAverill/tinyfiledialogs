@@ -13,7 +13,7 @@
 
 (license MIT)
 
-(documentation https://charlesaverill.github.io/tinyfiledialogs)
+(documentation https://charlesaverill.github.io/tinyfiledialogs/tinyfiledialogs/)
 
 (package
  (name tinyfiledialogs)
