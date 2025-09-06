@@ -1,0 +1,3 @@
+[submodule "lib/tinyfiledialogs"]
+	path = lib/tinyfiledialogs
+	url = https://git.code.sf.net/p/tinyfiledialogs/code

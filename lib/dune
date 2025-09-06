@@ -1,0 +1,12 @@
+(include_subdirs unqualified)
+
+(library
+ (name tinyfiledialogs)
+ (public_name tinyfiledialogs)
+ (modules tinyfiledialogs)
+ (libraries ctypes ctypes.foreign)
+ (foreign_stubs
+  (language c)
+  (flags
+   (-O3 -W -Wall -Wextra -fPIC))
+  (names tinyfiledialogs)))
