@@ -1,4 +1,3 @@
 (executable
- (public_name tinyfiledialogsdemo)
  (name main)
  (libraries tinyfiledialogs))
