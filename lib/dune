@@ -3,10 +3,23 @@
 (library
  (name tinyfiledialogs)
  (public_name tinyfiledialogs)
- (modules tinyfiledialogs)
- (libraries ctypes ctypes-foreign)
+ (libraries ctypes-foreign)
+ (install_c_headers "tinyfiledialogs/tinyfiledialogs")
  (foreign_stubs
   (language c)
-  (flags
-   (-O3 -W -Wall -Wextra -fPIC))
-  (names tinyfiledialogs)))
+  (names tinyfiledialogs tinyfd_moredialogs)
+  (flags (:standard -O3 -Wall -Wextra -fPIC)))
+ (flags
+  (:standard -w -9-27))
+ (ctypes
+  (external_library_name tinyfiledialogs)
+  (build_flags_resolver vendored)
+  (type_description
+   (instance Types)
+   (functor Type_description))
+  (function_description
+   (concurrency unlocked)
+   (instance Functions)
+   (functor Function_description))
+  (generated_types Types_generated)
+  (generated_entry_point C)))

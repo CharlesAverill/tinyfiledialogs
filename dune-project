@@ -1,4 +1,5 @@
 (lang dune 3.19)
+(using ctypes 0.3)
 
 (name tinyfiledialogs)
 

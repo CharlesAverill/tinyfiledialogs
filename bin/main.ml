@@ -3,7 +3,7 @@ open Printf
 
 let () =
   (* === Configure TinyFileDialogs globals === *)
-  set_tinyfd_verbose 1 ;
+  (* set_tinyfd_verbose 1 ;
   set_tinyfd_silent 0 ;
   set_tinyfd_allowCursesDialogs 0 ;
   set_tinyfd_forceConsole 0 ;
@@ -12,7 +12,7 @@ let () =
      force_console=%d\n"
     (get_tinyfd_verbose ()) (get_tinyfd_silent ())
     (get_tinyfd_allowCursesDialogs ())
-    (get_tinyfd_forceConsole ()) ;
+    (get_tinyfd_forceConsole ()) ; *)
   (* === 1. Test input box === *)
   ( match
       input_box ~title:"Input Box" ~message:"Enter your name:" ~default_input:""
