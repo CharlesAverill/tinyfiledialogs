@@ -7,13 +7,18 @@
  (install_c_headers "tinyfiledialogs/tinyfiledialogs")
  (foreign_stubs
   (language c)
-  (names tinyfiledialogs tinyfd_moredialogs)
-  (flags (:standard -O3 -Wall -Wextra -fPIC)))
+  (names tinyfiledialogs)
+  (include_dirs tinyfiledialogs)
+  (flags
+   (:standard -O3 -Wall -Wextra -fPIC)))
  (flags
   (:standard -w -9-27))
  (ctypes
   (external_library_name tinyfiledialogs)
   (build_flags_resolver vendored)
+  (headers
+   (preamble
+    "#include \"tinyfiledialogs/tinyfiledialogs.h\"\n#include <string.h>"))
   (type_description
    (instance Types)
    (functor Type_description))

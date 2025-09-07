@@ -1,19 +1,16 @@
 open Ctypes
 open C.Functions
 
-(* let lib =
-  Dl.dlopen ~filename:"libtinyfiledialogs_stubs.so"
-    ~flags:Dl.[RTLD_NOW; RTLD_GLOBAL] *)
-
-let strlen (s : char Ctypes_static.ptr) =
-  Unsigned.Size_t.to_int (strlen s)
+let strlen (s : char Ctypes_static.ptr) = Unsigned.Size_t.to_int (strlen s)
 
 let input_box ~(title : string) ~(message : string) ~(default_input : string) :
     string option =
+  print_endline "calling" ;
   match tinyfd_inputBox title message default_input with
   | None ->
-      None
+      print_endline "none" ; None
   | Some ptr ->
+      print_endline "some" ;
       Some (string_from_ptr ptr ~length:(strlen ptr))
 
 type dialog_type = Ok | OkCancel | YesNo | YesNoCancel
@@ -179,6 +176,6 @@ let set_tinyfd_forceConsole (v : int) : unit = tinyfd_forceConsole <-@ v *)
 
 let notify_popup ~(title : string) ~(message : string) ~(icon_type : icon_type)
     : unit =
-    tinyfd_notifyPopup title message (string_of_icon_type icon_type)
+  tinyfd_notifyPopup title message (string_of_icon_type icon_type)
 
 let beep = tinyfd_beep

@@ -9,8 +9,7 @@ module Functions (F : Ctypes.FOREIGN) = struct
   open F
 
   (* strlen *)
-  let strlen =
-    foreign "strlen" (ptr char @-> returning size_t)
+  let strlen = foreign "strlen" (ptr char @-> returning size_t)
 
   (* tinyfd_inputBox *)
   let tinyfd_inputBox =
@@ -25,12 +24,18 @@ module Functions (F : Ctypes.FOREIGN) = struct
   (* tinyfd_saveFileDialog *)
   let tinyfd_saveFileDialog =
     foreign "tinyfd_saveFileDialog"
-      (string @-> string @-> int @-> ptr (ptr char) @-> string @-> returning (ptr_opt char))
+      ( string @-> string @-> int
+      @-> ptr (const (ptr (const char)))
+      @-> string
+      @-> returning (ptr_opt char) )
 
   (* tinyfd_openFileDialog *)
   let tinyfd_openFileDialog =
     foreign "tinyfd_openFileDialog"
-      (string @-> string @-> int @-> ptr (ptr char) @-> string @-> int @-> returning (ptr_opt char))
+      ( string @-> string @-> int
+      @-> ptr (const (ptr (const char)))
+      @-> string @-> int
+      @-> returning (ptr_opt char) )
 
   (* tinyfd_selectFolderDialog *)
   let tinyfd_selectFolderDialog =
@@ -40,11 +45,11 @@ module Functions (F : Ctypes.FOREIGN) = struct
   (* tinyfd_colorChooser *)
   let tinyfd_colorChooser =
     foreign "tinyfd_colorChooser"
-      (string @-> string @-> ptr uint8_t @-> ptr uint8_t @-> returning (ptr_opt char))
+      ( string @-> string @-> ptr uint8_t @-> ptr uint8_t
+      @-> returning (ptr_opt char) )
 
   (* tinyfd_beep *)
-  let tinyfd_beep =
-    foreign "tinyfd_beep" (void @-> returning void)
+  let tinyfd_beep = foreign "tinyfd_beep" (void @-> returning void)
 
   (* tinyfd_notifyPopup *)
   let tinyfd_notifyPopup =
