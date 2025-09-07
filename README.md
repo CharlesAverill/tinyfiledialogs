@@ -4,4 +4,16 @@ OCaml bindings for [tinyfiledialogs](https://sourceforge.net/projects/tinyfiledi
 
 [API Documentation](https://charlesaverill.github.io/tinyfiledialogs/tinyfiledialogs/)
 
-[Example](bin/main.ml)
+## Installation
+
+```
+opam install tinyfiledialogs
+```
+
+## Example
+
+The [example program](bin/main.ml) can be run with
+
+```
+dune exec bin/main.exe
+```
