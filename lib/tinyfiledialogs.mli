@@ -79,6 +79,7 @@ val beep : unit -> unit
 val notify_popup : title:string -> message:string -> icon_type:icon_type -> unit
 (** Display a system notification popup with the given [title], [message], and [icon_type]. *)
 
+(*
 (** {1 Global Variables} *)
 
 val tinyfd_verbose : int Ctypes_static.ptr
@@ -109,4 +110,4 @@ val set_tinyfd_silent : int -> unit
 
 val set_tinyfd_allowCursesDialogs : int -> unit
 
-val set_tinyfd_forceConsole : int -> unit
+val set_tinyfd_forceConsole : int -> unit *)

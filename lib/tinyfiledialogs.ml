@@ -1,31 +1,17 @@
 open Ctypes
-open Foreign
+open C.Functions
 
-let lib =
-  Dl.dlopen ~filename:"_build/default/lib/dlltinyfiledialogs_stubs.so"
-    ~flags:Dl.[RTLD_NOW; RTLD_GLOBAL]
-
-let strlen (s : char Ctypes_static.ptr) =
-  Unsigned.Size_t.to_int
-    (foreign ~from:lib "strlen" (ptr char @-> returning size_t) s)
-
-(* tinyfd_inputBox *)
-let tinyfd_inputBox =
-  foreign ~from:lib "tinyfd_inputBox"
-    (string @-> string @-> string @-> returning (ptr_opt char))
+let strlen (s : char Ctypes_static.ptr) = Unsigned.Size_t.to_int (strlen s)
 
 let input_box ~(title : string) ~(message : string) ~(default_input : string) :
     string option =
+  print_endline "calling" ;
   match tinyfd_inputBox title message default_input with
   | None ->
-      None
+      print_endline "none" ; None
   | Some ptr ->
+      print_endline "some" ;
       Some (string_from_ptr ptr ~length:(strlen ptr))
-
-(* tinyfd_messageBox *)
-let tinyfd_messageBox =
-  foreign ~from:lib "tinyfd_messageBox"
-    (string @-> string @-> string @-> string @-> int @-> returning int)
 
 type dialog_type = Ok | OkCancel | YesNo | YesNoCancel
 
@@ -71,14 +57,6 @@ let string_list_to_c_ptr (list : string list) : char Ctypes_static.ptr ptr =
   Array.iteri (fun i cstr -> CArray.set c_ptrs i (CArray.start cstr)) ptrs ;
   CArray.start c_ptrs
 
-(* tinyfd_saveFileDialog *)
-let tinyfd_saveFileDialog =
-  foreign ~from:lib "tinyfd_saveFileDialog"
-    ( string @-> string @-> int
-    @-> ptr (ptr char)
-    @-> string
-    @-> returning (ptr_opt char) )
-
 let save_file_dialog ~(title : string) ~(default_path : string)
     ~(filter_patterns : string list option) ~(filter_desc : string) =
   let num_filters, patterns_ptr =
@@ -97,14 +75,6 @@ let save_file_dialog ~(title : string) ~(default_path : string)
       None
   | Some ptr ->
       Some (string_from_ptr ptr ~length:(strlen ptr))
-
-(* tinyfd_openFileDialog binding *)
-let tinyfd_openFileDialog =
-  foreign ~from:lib "tinyfd_openFileDialog"
-    ( string @-> string @-> int
-    @-> ptr (ptr char)
-    @-> string @-> int
-    @-> returning (ptr_opt char) )
 
 (* OCaml wrapper *)
 let open_file_dialog ~(title : string) ~(default_path : string)
@@ -130,11 +100,6 @@ let open_file_dialog ~(title : string) ~(default_path : string)
   | Some ptr ->
       Some (string_from_ptr ptr ~length:(strlen ptr))
 
-(* tinyfd_selectFolderDialog binding *)
-let tinyfd_selectFolderDialog =
-  foreign ~from:lib "tinyfd_selectFolderDialog"
-    (string @-> string @-> returning (ptr_opt char))
-
 (* OCaml wrapper *)
 let select_folder_dialog ~(title : string) ~(default_path : string) :
     string option =
@@ -143,12 +108,6 @@ let select_folder_dialog ~(title : string) ~(default_path : string) :
       None
   | Some ptr ->
       Some (string_from_ptr ptr ~length:(strlen ptr))
-
-(* tinyfd_colorChooser *)
-let tinyfd_colorChooser =
-  foreign ~from:lib "tinyfd_colorChooser"
-    ( string @-> string @-> ptr uint8_t @-> ptr uint8_t
-    @-> returning (ptr_opt char) )
 
 let fst3 (x, _, _) = x
 
@@ -186,17 +145,15 @@ let color_chooser ~(title : string) ~(default_hex : string option)
         , Unsigned.UInt8.to_int g
         , Unsigned.UInt8.to_int b )
 
-let tinyfd_verbose : int Ctypes_static.ptr =
-  foreign_value ~from:lib "tinyfd_verbose" int
+(* let tinyfd_verbose : int Ctypes_static.ptr = foreign_value "tinyfd_verbose" int
 
-let tinyfd_silent : int Ctypes_static.ptr =
-  foreign_value ~from:lib "tinyfd_silent" int
+let tinyfd_silent : int Ctypes_static.ptr = foreign_value "tinyfd_silent" int
 
 let tinyfd_allowCursesDialogs : int Ctypes_static.ptr =
-  foreign_value ~from:lib "tinyfd_allowCursesDialogs" int
+  foreign_value "tinyfd_allowCursesDialogs" int
 
 let tinyfd_forceConsole : int Ctypes_static.ptr =
-  foreign_value ~from:lib "tinyfd_forceConsole" int
+  foreign_value "tinyfd_forceConsole" int
 
 (* Getters *)
 let get_tinyfd_verbose () : int = !@tinyfd_verbose
@@ -215,15 +172,10 @@ let set_tinyfd_silent (v : int) : unit = tinyfd_silent <-@ v
 let set_tinyfd_allowCursesDialogs (v : int) : unit =
   tinyfd_allowCursesDialogs <-@ v
 
-let set_tinyfd_forceConsole (v : int) : unit = tinyfd_forceConsole <-@ v
-
-let beep : unit -> unit =
-  foreign ~from:lib "tinyfd_beep" (void @-> returning void)
-
-let tinyfd_notifypopup =
-  foreign ~from:lib "tinyfd_notifyPopup"
-    (string @-> string @-> string @-> returning void)
+let set_tinyfd_forceConsole (v : int) : unit = tinyfd_forceConsole <-@ v *)
 
 let notify_popup ~(title : string) ~(message : string) ~(icon_type : icon_type)
     : unit =
-  tinyfd_notifypopup title message (string_of_icon_type icon_type)
+  tinyfd_notifyPopup title message (string_of_icon_type icon_type)
+
+let beep = tinyfd_beep
