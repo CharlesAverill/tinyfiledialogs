@@ -25,7 +25,7 @@ module Functions (F : Ctypes.FOREIGN) = struct
   let tinyfd_saveFileDialog =
     foreign "tinyfd_saveFileDialog"
       ( string @-> string @-> int
-      @-> ptr (ptr char)
+      @-> ptr (const (ptr (const char)))
       @-> string
       @-> returning (ptr_opt char) )
 
@@ -33,7 +33,7 @@ module Functions (F : Ctypes.FOREIGN) = struct
   let tinyfd_openFileDialog =
     foreign "tinyfd_openFileDialog"
       ( string @-> string @-> int
-      @-> ptr (ptr char)
+      @-> ptr (const (ptr (const char)))
       @-> string @-> int
       @-> returning (ptr_opt char) )
 
