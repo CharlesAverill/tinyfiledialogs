@@ -22,8 +22,9 @@
  (synopsis "OCaml bindings to tinyfiledialogs")
  (description "Simple, cross-platform file dialogs")
  (depends ocaml dune 
-  (ctypes (>= 0.18.0))
-  (ctypes-foreign (>= 0.18.0)))
+  (ctypes (>= 0.23.0))
+  (ctypes-foreign (>= 0.23.0)))
+ (conflicts ocaml-option-bytecode-only)
  (tags
  ("GUI" "Dialogs" "File Dialog" "Color Picker" "Cross-Platform"
   "TinyFileDialogs" "Open File Dialog" "Save File Dialog"
