@@ -15,10 +15,12 @@
   (:standard -w -9-27))
  (ctypes
   (external_library_name tinyfiledialogs)
-  (build_flags_resolver vendored)
+  (build_flags_resolver
+   (vendored
+    (c_library_flags
+     (:include c_library_flags.sexp))))
   (headers
-   (preamble
-    "#include \"tinyfiledialogs/tinyfiledialogs.h\"\n#include <string.h>"))
+   (preamble %{read:preamble.lines}))
   (type_description
    (instance Types)
    (functor Type_description))
@@ -28,3 +30,10 @@
    (functor Function_description))
   (generated_types Types_generated)
   (generated_entry_point C)))
+
+(rule
+ (targets c_library_flags.sexp preamble.lines)
+ (deps
+  (:discover config/discover.exe))
+ (action
+  (run %{discover})))

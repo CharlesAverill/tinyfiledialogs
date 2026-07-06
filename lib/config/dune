@@ -1,0 +1,8 @@
+; Build-time program that detects the platform-specific compile/link
+; flags. 
+
+(include_subdirs no)
+
+(executable
+ (name discover)
+ (libraries dune-configurator))
