@@ -15,6 +15,7 @@
   (:standard -w -9-27))
  (ctypes
   (external_library_name tinyfiledialogs)
+  (deps (source_tree tinyfiledialogs))
   (build_flags_resolver vendored)
   (headers
    (preamble
